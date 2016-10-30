@@ -51,7 +51,7 @@ if __name__ == "__main__":
             color = (random.randint(0, 255), random.randint(0, 255), random.randint(0, 255))
             #cmdStr = getSerialCommand('0', color, (0, 0, 0), 40, 0)
             #cmdBytes = bytes(cmdStr, 'utf-8')
-            serLights.setPatternAndColors('0', color, (0,0,0), 40, 0)
+            serLights.setPatternAndColors('4', color, (0,0,0), 400, 0)
             #if (ser.isOpen() == False):
             #    ser.open()
             #ser.write(cmdBytes)
@@ -60,7 +60,7 @@ if __name__ == "__main__":
             #bulb1.setColor(color)
             bulb2.setColor(color)
             #bulb3.setColor(color)
-            time.sleep(0.5)
+            time.sleep(1)
             #cmdStr = getSerialCommand('0', (0,0,0), (0, 0, 0), 40, 0)
             #cmdBytes = bytes(cmdStr, 'utf-8')
             #ser.open()
@@ -68,10 +68,10 @@ if __name__ == "__main__":
             #ser.flush()
             #ser.close()
             #bulb1.setColor((0,0,0))
-            bulb2.setColor((0,0,0))
-            serLights.setPatternAndColors('0', (0,0,0), (0,0,0), 40, 0)
+            #bulb2.setColor((0,0,0))
+            #serLights.setPatternAndColors('0', (0,0,0), (0,0,0), 40, 0)
             #bulb3.setColor((0,0,0))
-            time.sleep(0.5)
+            #time.sleep(0.5)
     except(KeyboardInterrupt, SystemExit):
         print("End of program")
         # turn off the bulbs

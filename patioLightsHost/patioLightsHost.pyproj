@@ -31,6 +31,13 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="configuration.ini" />
+    <Content Include="www\css\style.css" />
+    <Content Include="www\submit.php" />
+    <Content Include="www\index.html" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="www\" />
+    <Folder Include="www\css\" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

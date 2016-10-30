@@ -1,0 +1,41 @@
+﻿<!DOCTYPE html>
+
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8" />
+    <title>Patio Lights Color Picker</title>
+    <link rel="stylesheet" type="text/css" href="css/style.css" />
+    <!-- uses jscolor for color picker jscolor.com -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jscolor/2.0.4/jscolor.js"></script>
+    <!-- Google Web Fonts -->
+    <link href='https://fonts.googleapis.com/css?family=Oswald|Roboto+Condensed:400,400italic,700italic,700,300' rel='stylesheet' type='text/css'>
+</head>
+<body>
+    <div id="header">
+        <h1>Patio Lights Color Picker</h1>
+        <a id="githublink" href="https://github.com/chris-johnston">github.com/Chris-Johnston</a>
+    </div>
+    <div id="wrapper">
+        <div id="inner">
+            <!-- A lot of this code is being referenced from Internet-Xmas-Tree -->
+            <form id="lightForm" action="submit.php" method="get">
+                <p>
+                    <span id="instruct">Enter in details and hit submit.</span>
+                    <br />
+                    Blah blah blah
+                    
+                    Color #1:
+                    <input name="color1" class="jscolor" value="00FF00" required/>
+                    
+                    <br />
+                    Color #2:
+                    <input name="color2" class="jscolor" value="00FF00" required/>
+                    <br />
+
+                    <input type="submit" value="Submit" />
+                </p>
+            </form>
+        </div>
+    </div>
+</body>
+</html>

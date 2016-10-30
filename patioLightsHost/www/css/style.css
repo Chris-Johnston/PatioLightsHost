@@ -1,0 +1,59 @@
+body
+{
+    margin: 0;
+    font-family: 'Roboto Condensed', sans-serif;
+    background-color: #EEEEEE;
+    background: repeating-linear-gradient(45deg, #EEEEEE, #EEEEEE 5px, #DEDEDE 5px, #DEDEDE 6px);
+}
+
+strong, em, a, h4 {
+    color: rgba(92, 182, 219, 1);
+}
+
+#header
+{
+    padding: 5px;
+    text-align:center;
+    color: white !important;
+    /* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#63b6db+0,309dcf+100;Blue+3D+%234 */
+    background: #63b6db; /* Old browsers */
+    background: -moz-linear-gradient(-45deg, #63b6db 0%, #309dcf 100%); /* FF3.6-15 */
+    background: -webkit-linear-gradient(-45deg, #63b6db 0%,#309dcf 100%); /* Chrome10-25,Safari5.1-6 */
+    background: linear-gradient(135deg, #63b6db 0%,#309dcf 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#63b6db', endColorstr='#309dcf',GradientType=1 ); /* IE6-9 fallback on horizontal gradient */
+    box-shadow: rgba(0,0,0,0.4) 0px 2px 5px;
+}
+
+#githublink{
+    margin-bottom: 5px;
+    color:rgba(255,255,255,0.8);
+    display: inline;
+    margin-bottom: 5px;
+}
+
+
+h1{
+    display: block;
+    margin:0;
+    /*padding-top: 10px;*/
+    font-size:300%;
+    text-shadow: 0 0 3px #000000;
+}
+
+#wrapper
+{
+    display: block;
+    max-width: 90%;
+    margin-top: 40px;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 40px;
+    background: #FFFFFF;
+    border: 0.25px solid #63b6db;
+    box-shadow: rgba(0,0,0,0.4) 0px 2px 5px;
+}
+
+#inner
+{
+    padding: 10px;
+}
