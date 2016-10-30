@@ -10,25 +10,6 @@ ser = serial.Serial()
 # patio lights main script
 config = GlobalConfiguration("configuration.ini")
 
-#def getSerialCommand(patternValue, color1tuple, color2tuple, animationSpeed, holdSpeed):
-#    str = ""
-#    str += config.patternsDict.get('start_of_message')
-#    str += "1" # just do the front lights for now
-#    str += patternValue
-#    str += '{:03d}'.format(color1tuple[0]) # color 1 r g b
-#    str += '{:03d}'.format(color1tuple[1])
-#    str += '{:03d}'.format(color1tuple[2])
-#    str += '{:03d}'.format(color2tuple[0]) # color 2 r g b
-#    str += '{:03d}'.format(color2tuple[1])
-#    str += '{:03d}'.format(color2tuple[2])
-#    str += '{:04d}'.format(animationSpeed)
-#    str += '{:04d}'.format(holdSpeed)
-#    str += config.patternsDict.get('end_of_message')
-#    str += '\n'
-#    print(str)
-#    return str
-
-
 if __name__ == "__main__":
     print("Start of program")
     config = GlobalConfiguration("configuration.ini")
