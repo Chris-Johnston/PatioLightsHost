@@ -1,9 +1,9 @@
-﻿<!DOCTYPE html>
-
+﻿<!DOCTYPE HTML>
 <html lang="en" xmlns="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="utf-8" />
     <title>Patio Lights Color Picker</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
     <link rel="stylesheet" type="text/css" href="css/style.css" />
     <!-- uses jscolor for color picker jscolor.com -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jscolor/2.0.4/jscolor.js"></script>
@@ -22,15 +22,61 @@
                 <p>
                     <span id="instruct">Enter in details and hit submit.</span>
                     <br />
-                    Blah blah blah
-                    
-                    Color #1:
-                    <input name="color1" class="jscolor" value="00FF00" required/>
-                    
-                    <br />
-                    Color #2:
-                    <input name="color2" class="jscolor" value="00FF00" required/>
-                    <br />
+
+                    <div class="parameter">
+                        Strip Color #1:
+                        <input name="color1" class="jscolor" value="00FF00" required />
+                    </div>
+
+                    <div class="parameter">
+                        Strip Color #2:
+                        <input name="color2" class="jscolor" value="0000FF" required />
+                    </div>
+                   
+                    <div class="parameter">
+                        Lightbulb Color #1:
+                        <input name="bulb1" class="jscolor" value="00FF00" required />
+                    </div>
+
+                    <div class="parameter">
+                    Lightbulb Color #2:
+                    <input name="bulb2" class="jscolor" value="0000FF" required />
+                    </div>
+
+                    <div class="parameter">
+                        Lightbulb Color #3:
+                        <input name="bulb3" class="jscolor" value="FF0000" required />
+                    </div>
+
+                    <div class="parameter"> 
+                        Light Strip Pattern:
+                        <select name="stripPattern" id="selectPattern" required>
+                            <option value="0">Solid Color 1</option>
+                            <option value="1">Blink Color 1 and 2</option>
+                            <option value="2">Pulse Color 1 and 2</option>
+                            <option value="3">Hard Scroll Color 1 and 2</option>
+                            <!-- Other patterns aren't working.. yet. This is work in progress-->
+                        </select>
+                    </div>
+
+                    <div class="parameter">
+                        Lightbulb Pattern:
+                        <select name="bulbPattern" id="selectBulbPattern" required>
+                            <option value="0">All color 1</option>
+                            <option value="1">All each color</option>
+                            <option value="2">Waves color 1 and color 2</option>
+                        </select>
+                    </div>
+
+                    <div class="parameter">
+                        Light strip delay value (ms):
+                        <input name="stripDelay1" value="750" min="1" max="9999" />
+                    </div>
+
+                    <div class="parameter">
+                        Lightbulb delay value (ms):
+                        <input name="bulbDelay1" value="750" min="500" max="9999" />
+                    </div>
 
                     <input type="submit" value="Submit" />
                 </p>
