@@ -38,7 +38,7 @@
                 {
                     // remove any # from the hex value
                     $hex = str_replace("#", "", $hexColorValue);
-                    if(strlen($hex) == 3) {
+                    if(strlen($hex) == 3) {`
                         $_r = hexdec(substr($hex,0,1).substr($hex,0,1));
                         $_g = hexdec(substr($hex,1,1).substr($hex,1,1));
                         $_b = hexdec(substr($hex,2,1).substr($hex,2,1));
