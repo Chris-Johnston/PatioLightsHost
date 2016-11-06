@@ -31,6 +31,15 @@ strong, em, a, h4 {
     margin-bottom: 5px;
 }
 
+#phpOutput{
+    background: rgb(220,220,220);
+    word-wrap: break-word;
+    width: 90%;
+    font-size: 12pt;
+    display: inline-block;
+    border: 1px solid rgb(128,128,128);
+}
+
 
 h1{
     display: block;
@@ -85,7 +94,7 @@ h1{
 } 
 
 /* small screen and mobile phones */
-@media only screen and (max-width: 1000px)
+/*@media only screen and (max-width: 1000px)
                    and (orientation: portrait)
 {
     #wrapper
@@ -116,9 +125,10 @@ h1{
         font-size: 250%;
     }
 }
+*/
 
 /* this applies to desktops as well */
-@media only screen and (orientation: landscape)
+/*@media only screen and (orientation: landscape)
 {
     *{
         font-size: 103%;
@@ -126,10 +136,11 @@ h1{
     h1{
         font-size: 220%;
     }
-}
+}*/
 
 /* transition */
-*
+/**
 {
     transition: ease-out 0.5s;
 }
+*/

@@ -41,7 +41,7 @@ class WifiBulb(object):
 
     def disconnect(self):
         """ disconnects the socket """
-        self._setColor((0,0,0))
+        #self._setColor((0,0,0))
         self.s.detach()
 
     def _setColor(self, color):

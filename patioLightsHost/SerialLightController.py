@@ -3,7 +3,6 @@ import serial
 from threading import Thread
 
 class SerialLightController(object):
-    config = GlobalConfiguration("configuration.ini")
     ser = serial.Serial()
 
     def getSerialStr(self, patternValue, color1tuple, color2tuple, animationSpeed, holdSpeed):
@@ -23,10 +22,9 @@ class SerialLightController(object):
         str += '\n'
         return str
 
-    def __init__(self, configFilePath):
+    def __init__(self, globalConfig):
         """ constructor """
-        self.config = GlobalConfiguration(configFilePath)
-        self.config.load()
+        self.config = globalConfig
 
     def _connect(self):
         try:
