@@ -1,11 +1,12 @@
 from GlobalConfiguration import GlobalConfiguration
 import serial
+import json
 from threading import Thread
 
 class SerialLightController(object):
     ser = serial.Serial()
 
-    def getSerialStr(self, patternValue, color1tuple, color2tuple, animationSpeed, holdSpeed):
+    def getSerialStringOld(self, patternValue, color1tuple, color2tuple, animationSpeed, holdSpeed):
         str = ""
         str += self.config.patternsDict.get('start_of_message')
         str += "1" # just do the front lights for now
@@ -21,6 +22,20 @@ class SerialLightController(object):
         str += self.config.patternsDict.get('end_of_message')
         str += '\n'
         return str
+
+    # using JSON instead of binary data to make things more readable
+    def getJSONStr(self, pattern, color1, color2, animationSpeed, holdSpeed):
+        data = {}
+        data["pattern"] = pattern
+        data["color1"] = color1
+        data["color2"] = color2
+        data["animationSpeed"] = animationSpeed
+        data["holdSpeed"] = holdSpeed
+        str = json.dumps(data, indent = 4)
+        #debug
+        print(str)
+        return str
+
 
     def __init__(self, globalConfig):
         """ constructor """
@@ -48,7 +63,7 @@ class SerialLightController(object):
     def _setPatternAndColors(self, patternValue, color1tuple, color2tuple, animationSpeed, holdSpeed):
         try:
             print("pattern")
-            command = self.getSerialStr(patternValue, color1tuple, color2tuple, animationSpeed, holdSpeed)
+            command = self.getSerialStringOld(patternValue, color1tuple, color2tuple, animationSpeed, holdSpeed)
             cmdBytes = bytes(command, 'utf-8')
             self.ser.write(cmdBytes)
         except Exception as e:

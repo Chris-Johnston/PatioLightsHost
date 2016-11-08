@@ -111,9 +111,11 @@ if __name__ == "__main__":
         #bulb3.setColor(color1)
         delay = 1
         longerDelay = 0.5
-        serLights.setPatternAndColors('2', (255,0,0), (0,0,0), 500,0)
+        #serLights.setPatternAndColors('2', (255,0,0), (0,0,0), 500,0)
+        s = serLights.getJSONStr('2', (255, 0,0), (0,0,0), 500, 500)
 
         while(True):
+            donothing = 5
             # read the contents of the file again
             #try:
             #    file = open(config.DataFile, "rb")
