@@ -3,6 +3,7 @@
 <head>
     <meta charset="utf-8" />
     <title>Patio Lights Color Picker</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
     <link rel="stylesheet" type="text/css" href="css/style.css" />
     <!-- uses jscolor for color picker jscolor.com -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jscolor/2.0.4/jscolor.js"></script>
