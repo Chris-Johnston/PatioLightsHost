@@ -15,8 +15,7 @@
         <a id="githublink" href="https://github.com/chris-johnston">github.com/Chris-Johnston</a>
     </div>
     <div id="wrapper">
-        <div id="inner">
-            <div id="status">
+        <div id="status">
                 Your information has been entered.
                 <br />
                 <!-- wrap the php output in code. it'll just output json -->
@@ -105,9 +104,8 @@
                 ?>
                 </div>
             </div>
-            <br />
-            <a href="index.html">Return the the color picker.</a>
-        </div>
+        <br />
+        <a href="index.html">Return the the color picker.</a>
     </div>
 </body>
 </html>
