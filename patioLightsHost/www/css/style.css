@@ -51,8 +51,8 @@ h1{
 
 #wrapper
 {
-    display: block;
-    max-width: 90%;
+    max-width: 80%;
+    min-width: 700px;
     margin-top: 40px;
     margin-left: auto;
     margin-right: auto;
@@ -60,11 +60,7 @@ h1{
     background: #FFFFFF;
     border: 0.25px solid #63b6db;
     box-shadow: rgba(0,0,0,0.4) 0px 2px 5px;
-}
-
-#inner
-{
-    padding: 10px;
+    padding: 5px;
     text-align:center;
 }
 
@@ -72,75 +68,73 @@ h1{
 {
     /*border: 1px solid rgba(0,0,0,0.2);
     border-radius: 10px;*/
-    padding-left: 20px;
-    padding-right: 20px;
     margin: 10px auto;
     display: block;
     line-height: 2;
-    max-width: 90%;
-}
-
-#lightForm > input
-{
-    
 }
 
 .parameter {
-    display:block;
+    display: inline-block;
+    text-align:right;
+    width: 200px;
 }
+
+input
+{
+    width: 100px;
+}
+
+select
+{
+    width: 105px;
+}
+
 #status
 {
     /*text-align:center;*/
 } 
 
 /* small screen and mobile phones */
-/*@media only screen and (max-width: 1000px)
-                   and (orientation: portrait)
+@media only screen and (max-width: 700px)
+{
+    h1{
+        font-size-adjust: 0.45;
+    }
+    #githublink
+    {
+        font-size-adjust: 0.45;
+    }
+    
+    #wrapper
+    {
+        margin-top: 5px;
+        max-width: 100%;
+        min-width: 0;
+    }
+    
+    #lightForm
+    {
+        
+    }
+    
+    .parameter
+    {
+        
+    }
+}
+
+
+/* landscape, large screen */
+@media only screen and (orientation: landscape)
 {
     #wrapper
     {
-        max-width: 95%;
-        margin: 5px auto;
-    }
-    #inner
-    {
-        padding: 0px;
-    }
-    #lightForm
-    {
-        max-width: 100%;
-        width: 90%;
-        margin: 0px auto;
-        padding: 0px;
-    }
-    .parameter
-    {
-       display: inline-block;    
-    }
-    *
-    { 
-	font-size: 107%;
-    }
-    h1{
-        font-size: 250%;
+       
     }
 }
-*/
-
-/* this applies to desktops as well */
-/*@media only screen and (orientation: landscape)
-{
-    *{
-        font-size: 103%;
-    }
-    h1{
-        font-size: 220%;
-    }
-}*/
 
 /* transition */
-/**
-{
+
+* {
     transition: ease-out 0.5s;
 }
-*/

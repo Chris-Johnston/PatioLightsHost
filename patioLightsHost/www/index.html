@@ -16,80 +16,89 @@
         <a id="githublink" href="https://github.com/chris-johnston">github.com/Chris-Johnston</a>
     </div>
     <div id="wrapper">
-        <div id="inner">
             <!-- A lot of this code is being referenced from Internet-Xmas-Tree -->
-            <form id="lightForm" action="submit.php" method="get">
-                <p>
-                    <span id="instruct">Enter in details and hit submit.</span>
-                    <br />
+        <form id="lightForm" action="submit.php" method="get">
+            <p>
+                <span id="instruct">Enter in details and hit submit.</span>
+                <br />
 
-                    <div class="parameter">
-                        Strip Color #1:
-                        <input name="color1" class="jscolor" value="00FF00" required />
-                    </div>
+                <div class="parameter">
+                    Strip Color #1:
+                </div>
+                <input name="color1" class="jscolor" value="00FF00" required />
+                <br />
+                
 
-                    <div class="parameter">
-                        Strip Color #2:
-                        <input name="color2" class="jscolor" value="0000FF" required />
-                    </div>
+                <div class="parameter">
+                    Strip Color #2:
+                </div>
+                <input name="color2" class="jscolor" value="0000FF" required />
+                <br />
                    
-                    <div class="parameter">
-                        Lightbulb Color #1:
-                        <input name="bulb1" class="jscolor" value="00FF00" required />
-                    </div>
+                <div class="parameter">
+                    Lightbulb Color #1:
+                </div>
+                <input name="bulb1" class="jscolor" value="00FF00" required />
+                <br/>
 
-                    <div class="parameter">
+                <div class="parameter">
                     Lightbulb Color #2:
-                    <input name="bulb2" class="jscolor" value="0000FF" required />
-                    </div>
+                </div>
+                <input name="bulb2" class="jscolor" value="0000FF" required />
+                <br/>
 
-                    <div class="parameter">
-                        Lightbulb Color #3:
-                        <input name="bulb3" class="jscolor" value="FF0000" required />
-                    </div>
+                <div class="parameter">
+                    Lightbulb Color #3:
+                </div>
+                <input name="bulb3" class="jscolor" value="FF0000" required />
+                <br/>
 
-                    <div class="parameter"> 
-                        Light Strip Pattern:
-                        <select name="stripPattern" id="selectPattern" required>
-                            <option value="0">Solid Color 1</option>
-                            <option value="1">Blink Color 1 and 2</option>
-                            <option value="2">Pulse Color 1 and 2</option>
-                            <option value="3">Hard Scroll Color 1 and 2</option>
-                            <option value="4">Smooth Scroll Color 1 and 2</option>
-                            <option value="7">Larson Scanner</option>
-                            <option value="a">Red White and Blue</option>
-                            <!-- Other patterns aren't working.. yet. This is work in progress-->
-                        </select>
-                    </div>
+                <div class="parameter"> 
+                    Light Strip Pattern:
+                </div>
+                <select name="stripPattern" id="selectPattern" required>
+                    <option value="0">Solid Color 1</option>
+                    <option value="1">Blink Color 1 and 2</option>
+                    <option value="2">Pulse Color 1 and 2</option>
+                    <option value="3">Hard Scroll Color 1 and 2</option>
+                    <option value="4">Smooth Scroll Color 1 and 2</option>
+                    <option value="7">Larson Scanner</option>
+                    <option value="a">Red White and Blue</option>
+                    <!-- Other patterns aren't working.. yet. This is work in progress-->
+                </select>
+                <br/>
 
-                    <div class="parameter">
-                        Lightbulb Pattern:
-                        <select name="bulbPattern" id="selectBulbPattern" required>
-                            <option value="0">All color 1</option>
-                            <option value="1">All each color</option>
-                            <option value="2">Waves color 1 and color 2</option>
-                        </select>
-                    </div>
+                <div class="parameter">
+                    Lightbulb Pattern:
+                </div>
+                <select name="bulbPattern" id="selectBulbPattern" required>
+                    <option value="0">All color 1</option>
+                    <option value="1">All each color</option>
+                    <option value="2">Waves color 1 and color 2</option>
+                </select>
+                <br />
 
-                    <div class="parameter">
-                        Light strip delay value (ms):
-                        <input name="stripDelay1" value="750" min="1" max="9999" />
-                    </div>
+                <div class="parameter">
+                    Light strip delay value (ms):
+                </div>
+                <input name="stripDelay1" value="750" min="1" max="9999" />
+                <br />
 
-                    <div class="parameter">
-                        Lightbulb delay value (ms):
-                        <input name="bulbDelay1" value="750" min="500" max="9999" />
-                    </div>
+                <div class="parameter">
+                    Lightbulb delay value (ms):
+                </div>
+                <input name="bulbDelay1" value="750" min="500" max="9999" />
+                <br />
 
-                    <div class="parameter">
-                        Width:
-                        <input name="width" value="5" min="1" max="99" />
-                    </div>
+                <div class="parameter">
+                    Width:
+                </div>
+                <input name="width" value="5" min="1" max="999" />
+                <br />
 
-                    <input type="submit" value="Submit" />
-                </p>
-            </form>
-        </div>
+                <input type="submit" value="Submit" />
+            </p>
+        </form>
     </div>
 </body>
 </html>
