@@ -6,6 +6,9 @@ import json
 from WifiBulb import WifiBulb
 from SerialLightController import SerialLightController
 
+# dono't actually do anything
+dryRun = False
+
 ser = serial.Serial()
 
 # data
@@ -26,14 +29,21 @@ config = GlobalConfiguration("configuration.ini")
 # should handle the lightbulb pattern stuff somewhere else
 
 def pulse(color1, color2, delay):
+    global dryRun
     time.sleep(delay / 1000.0)
-    bulb1.setColor(color1)
-    bulb2.setColor(color1)
-    bulb3.setColor(color1)
+    if not dryRun:
+        bulb1.setColor(color1)
+        bulb2.setColor(color1)
+        bulb3.setColor(color1)
+    else:
+        print("set bulb color: ", color1)
     time.sleep(delay / 1000.0)
-    bulb1.setColor(color2)
-    bulb2.setColor(color2)
-    bulb3.setColor(color2)
+    if not dryRun:
+        bulb1.setColor(color2)
+        bulb2.setColor(color2)
+        bulb3.setColor(color2)
+    else:
+        print("set bulb color: ", color2)
 
 
 def cycleLights(color1, color2, longerDelay, delay):
@@ -87,7 +97,7 @@ if __name__ == "__main__":
     # configuration loaded
     # open serial connection
     serLights = SerialLightController("configuration.ini")
-    #serLights.connect()
+    serLights.connect()
     
     # open data file, parse it, close it
     readWebColorData()
@@ -97,37 +107,43 @@ if __name__ == "__main__":
     bulb3 = WifiBulb(config.Lightbulb3_IP)
 
     try:
-        #bulb1.connect()
-        #bulb2.connect()
-        #bulb3.connect()
+        bulb1.connect()
+        bulb2.connect()
+        bulb3.connect()
         x = 1 # nothing
     except Exception as e:
         print("Failed to connect to one or more lightbulbs! " + str(e))
 
     try:
-        
-        #bulb1.setColor(color1)
-        #bulb2.setColor(color1)
-        #bulb3.setColor(color1)
+        if not dryRun:
+            bulb1.setColor(color1)
+            bulb2.setColor(color1)
+            bulb3.setColor(color1)
+        else:
+            print("all bulbs set to ", color1)
         delay = 1
         longerDelay = 0.5
         #serLights.setPatternAndColors('2', (255,0,0), (0,0,0), 500,0)
-        s = serLights.getJSONStr('2', (255, 0,0), (0,0,0), 500, 500)
+        command = serLights.getJSONStr('2', (255, 0,0), (0,0,0), 500, 500)
+        if not dryRun:
+            serLights.sendMessage(command)
+        else:
+            print("Serial: " + command)
 
         while(True):
-            donothing = 5
             # read the contents of the file again
-            #try:
-            #    file = open(config.DataFile, "rb")
-            #except FileNotFoundError:
-            #    print("Web data file not found!")
-            
+            readWebColorData()
+            # sleep for a little bit
+            time.sleep(0.5)
             # keep the lights on for a few seconds
             #placeholder pattern, just turn the lights on and off in a pulsing pattern
-            #cycleLights(bulbColor1, bulbColor2, longerDelay, delay)
+            if not dryRun:
+                pulse(bulbColor1, bulbColor2, longerDelay, delay)
+            else:
+                print("pulse " , bulbColor1)
     except(KeyboardInterrupt, SystemExit):
         print("End of program")
-        # turn off the bulbs
+        # disconnect from everything
         bulb1.disconnect()
         bulb2.disconnect()
         bulb3.disconnect()
