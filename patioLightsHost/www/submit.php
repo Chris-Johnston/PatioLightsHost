@@ -35,6 +35,7 @@
                 $bulbPattern = $_GET["bulbPattern"];
                 $stripDelay1 = $_GET["stripDelay1"];
                 $bulbDelay1 = $_GET["bulbDelay1"];
+                $width = $_GET["width"];
 
                 function hexToRGB($hexColorValue)
                 {
@@ -79,8 +80,9 @@
                     "bulbColor3" => $bulbColor3,
                     "stripPattern" => $stripPattern,
                     "bulbPattern" => $bulbPattern,
-                    "stripDelay1" => $stripDelay1,
-                    "bulbDelay1" => $bulbDelay1
+                    "stripDelay1" => intval($stripDelay1),
+                    "bulbDelay1" => intval($bulbDelay1),
+                    "width" => intval($width)
                     );
                 
                 /*
