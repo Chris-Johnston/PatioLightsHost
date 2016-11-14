@@ -89,11 +89,14 @@ def readWebColorData():
         stripWidth = jsonData["width"]
         file.close()
         print("got data from file")
-    except FileNotFoundError:
+    except OSError:
         print("Data file not found, check configuration.ini")
     except Exception as e:
         print(e)
 
+        #todo consider adding downtimes where lights cannot be changed, or have
+        # a default pattern for tduring those times
+        # so I'm not strobing out at 3am
 
 if __name__ == "__main__":
     print("Start of program")
