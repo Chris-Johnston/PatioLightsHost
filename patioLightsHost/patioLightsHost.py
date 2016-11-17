@@ -156,7 +156,7 @@ if __name__ == "__main__":
             readWebColorData()
             serLights.setPatternAndColors(stripPattern, stripColor1, stripColor2, stripDelay1, stripDelay1, stripWidth)
             # sleep for a little bit
-            time.sleep(0.5)
+            time.sleep(5)
             # keep the lights on for a few seconds
             #placeholder pattern, just turn the lights on and off in a pulsing pattern
             if not dryRun:

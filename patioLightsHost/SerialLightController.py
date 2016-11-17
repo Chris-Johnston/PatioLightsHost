@@ -1,6 +1,7 @@
 ﻿from GlobalConfiguration import GlobalConfiguration
 import serial
 import json
+import time
 from threading import Thread
 
 class SerialLightController(object):
@@ -20,6 +21,10 @@ class SerialLightController(object):
         str += '{:04d}'.format(animationSpeed)
         str += '{:04d}'.format(holdSpeed)
         str += '{:03d}'.format(width)
+        # checksum value
+        # add up values and % 99
+        # checksum value 99 is always accepted
+        str += '{:02d}'.format((color1tuple[0] + color1tuple[1] + color1tuple[2] + color2tuple[0] + color2tuple[1] + color2tuple[2] + animationSpeed + holdSpeed + width) % 99)
         str += self.config.patternsDict.get('end_of_message')
         str += '\n'
         return str
@@ -30,7 +35,7 @@ class SerialLightController(object):
 
     def _connect(self):
         try:
-            self.ser = serial.Serial(self.config.SerialPort, self.config.BaudRate, timeout = 1)
+            self.ser = serial.Serial(self.config.SerialPort, self.config.BaudRate)
             print("connected to serial")
         except Exception as e:
             print(e)
@@ -52,10 +57,32 @@ class SerialLightController(object):
         # only if open
         if(self.ser.isOpen()):
             try:
+                #message = 's72550000000000000001500225008e\r'
                 cmdBytes = bytes(message, 'utf-8')
+                # print the garbage character
+                print("x")
+                #self.ser.write(bytes('\r' + 'x'*100 + '\r', 'utf-8'))
+                self.ser.write(b'x')
+                
+                #self.ser.flush()
+                #self.ser.flushOutput()
+                #time.sleep(0.1)
+                time.sleep(0.05)
+                #print(self.ser.readline())
+                # wait for response
+
+                #while ("Useless" not in response):
+                    #print(bytes('x'*100, 'utf-8'))
+                #    self.ser.write(bytes('x'*100, 'utf-8'))
+                #    #self.ser.flushOutput()
+                #    time.sleep(0.1)
+                #    response = str(self.ser.read_all())
+                #    print(response)
                 print("\nWriting", cmdBytes)
+                # then print the actual data
+                #self.ser.write(cmdBytes)
                 self.ser.write(cmdBytes)
-                self.ser.flush()
+                self.ser.flushOutput()
             except Exception as e:
                 print(e)
                 print("error sending message : " + message)
