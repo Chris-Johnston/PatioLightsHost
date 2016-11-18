@@ -135,6 +135,6 @@ select
 
 /* transition */
 
-* {
+/** {
     transition: ease-out 0.5s;
-}
+}*/

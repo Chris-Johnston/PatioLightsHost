@@ -141,7 +141,8 @@ if __name__ == "__main__":
         #    serLights.sendMessage(command)
         #else:
         #    print("Serial: " + command)
-
+        # allows everything to get ready
+        #time.sleep(5)
         while(True):
             # test command, this works
             #command = 'start225500025500000000005000500end\n'

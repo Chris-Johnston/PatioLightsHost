@@ -6,6 +6,11 @@ from threading import Thread
 
 class SerialLightController(object):
     ser = serial.Serial()
+    ready = False
+    prevCommand = ""
+    # allow sending the same command up to 3 times
+    duplicateCounter = 0
+    duplicateTolerance = 3
 
     def getSerialString(self, patternValue, color1tuple, color2tuple, animationSpeed, holdSpeed, width):
         str = ""
@@ -37,6 +42,9 @@ class SerialLightController(object):
         try:
             self.ser = serial.Serial(self.config.SerialPort, self.config.BaudRate)
             print("connected to serial")
+            time.sleep(5)
+            self.ready = True
+            # compensate for the arduino rebooting
         except Exception as e:
             print(e)
             print("Error opening serial connection!")
@@ -51,41 +59,54 @@ class SerialLightController(object):
         #self._setPatternAndColors('0', (0,0,0), (0,0,0), 0, 0)
         self.ser.flush()
         self.ser.close()
+        self.ready = False
 
     def sendMessage(self, message):
         """ send message over serial"""
-        # only if open
-        if(self.ser.isOpen()):
-            try:
-                #message = 's72550000000000000001500225008e\r'
-                cmdBytes = bytes(message, 'utf-8')
-                # print the garbage character
-                print("x")
-                #self.ser.write(bytes('\r' + 'x'*100 + '\r', 'utf-8'))
-                self.ser.write(b'x')
-                
-                #self.ser.flush()
-                #self.ser.flushOutput()
-                #time.sleep(0.1)
-                time.sleep(0.05)
-                #print(self.ser.readline())
-                # wait for response
+        # only if open, ready
+        if(self.ser.isOpen() and self.ready):
+            # check for duplicate command
+            if(message == self.prevCommand):
+                self.duplicateCounter += 1
 
-                #while ("Useless" not in response):
-                    #print(bytes('x'*100, 'utf-8'))
-                #    self.ser.write(bytes('x'*100, 'utf-8'))
-                #    #self.ser.flushOutput()
-                #    time.sleep(0.1)
-                #    response = str(self.ser.read_all())
-                #    print(response)
-                print("\nWriting", cmdBytes)
-                # then print the actual data
-                #self.ser.write(cmdBytes)
-                self.ser.write(cmdBytes)
-                self.ser.flushOutput()
-            except Exception as e:
-                print(e)
-                print("error sending message : " + message)
+            # over tolerance for duplictates (3)
+            if((message == self.prevCommand and self.duplicateCounter <= self.duplicateTolerance) or message != self.prevCommand):
+                try:
+                    if(self.prevCommand != message):
+                        self.duplicateCounter = 0
+                    self.ready = False # don't have another sendMessage during this one
+                    #message = 's72550000000000000001500225008e\r'
+                    cmdBytes = bytes(message, 'utf-8')
+                    # print the garbage character
+                    print("x")
+                    #self.ser.write(bytes('\r' + 'x'*100 + '\r', 'utf-8'))
+                    self.ser.write(b'x')
+                
+                    #self.ser.flush()
+                    #self.ser.flushOutput()
+                    #time.sleep(0.1)
+                    time.sleep(0.05)
+                    #print(self.ser.readline())
+                    # wait for response
+
+                    #while ("Useless" not in response):
+                        #print(bytes('x'*100, 'utf-8'))
+                    #    self.ser.write(bytes('x'*100, 'utf-8'))
+                    #    #self.ser.flushOutput()
+                    #    time.sleep(0.1)
+                    #    response = str(self.ser.read_all())
+                    #    print(response)
+                    print("\nWriting", cmdBytes)
+                    # then print the actual data
+                    #self.ser.write(cmdBytes)
+                    self.ser.write(cmdBytes)
+                    self.ser.flushOutput()
+                    self.prevCommand = message
+                    self.ready = True
+                except Exception as e:
+                    self.ready = True
+                    print(e)
+                    print("error sending message : " + message)
 
     def _setPatternAndColors(self, patternValue, color1tuple, color2tuple, animationSpeed, holdSpeed, width):
         try:
