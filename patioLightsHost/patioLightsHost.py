@@ -6,8 +6,8 @@ import random
 from WifiBulb import WifiBulb
 from SerialLightController import SerialLightController
 
-# dono't actually do anything
-dryRun = True
+
+dryRun = False
 
 ser = serial.Serial()
 
@@ -29,35 +29,35 @@ config = GlobalConfiguration("configuration.ini")
 
 # should handle the lightbulb pattern stuff somewhere else
 
-def pulse(color1, color2, delay):
-    global dryRun
-    time.sleep(delay / 1000.0)
-    if not dryRun:
-        bulb1.setColor(color1)
-        bulb2.setColor(color1)
-        bulb3.setColor(color1)
-    else:
-        print("set bulb color: ", color1)
-    time.sleep(delay / 1000.0)
-    if not dryRun:
-        bulb1.setColor(color2)
-        bulb2.setColor(color2)
-        bulb3.setColor(color2)
-    else:
-        print("set bulb color: ", color2)
+#def pulse(color1, color2, delay):
+#    global dryRun
+#    time.sleep(delay / 1000.0)
+#    if not dryRun:
+#        bulb1.setColor(color1)
+#        bulb2.setColor(color1)
+#        bulb3.setColor(color1)
+#    else:
+#        print("set bulb color: ", color1)
+#    time.sleep(delay / 1000.0)
+#    if not dryRun:
+#        bulb1.setColor(color2)
+#        bulb2.setColor(color2)
+#        bulb3.setColor(color2)
+#    else:
+#        print("set bulb color: ", color2)
 
 
-def cycleLights(color1, color2, longerDelay, delay):
-    time.sleep(longerDelay)
-    bulb1.setColor(color2)
-    time.sleep(delay)
-    bulb1.setColor(color1)
-    bulb2.setColor(color2)
-    time.sleep(delay)
-    bulb2.setColor(color1)
-    bulb3.setColor(color2)
-    time.sleep(delay)
-    bulb3.setColor(color1)
+#def cycleLights(color1, color2, longerDelay, delay):
+#    time.sleep(longerDelay)
+#    bulb1.setColor(color2)
+#    time.sleep(delay)
+#    bulb1.setColor(color1)
+#    bulb2.setColor(color2)
+#    time.sleep(delay)
+#    bulb2.setColor(color1)
+#    bulb3.setColor(color2)
+#    time.sleep(delay)
+#    bulb3.setColor(color1)
 
 def readWebColorData():
     global bulbColor1
@@ -120,15 +120,14 @@ if __name__ == "__main__":
             bulb1.connect()
             bulb2.connect()
             bulb3.connect()
-        x = 1 # nothing
     except Exception as e:
         print("Failed to connect to one or more lightbulbs! " + str(e))
 
     try:
         if not dryRun:
             bulb1.setColor(bulbColor1)
-            bulb2.setColor(bulbColor1)
-            bulb3.setColor(bulbColor1)
+            bulb2.setColor(bulbColor2)
+            bulb3.setColor(bulbColor3)
         else:
             print("all bulbs set to ", bulbColor1)
         delay = 1
@@ -160,10 +159,14 @@ if __name__ == "__main__":
             time.sleep(5)
             # keep the lights on for a few seconds
             #placeholder pattern, just turn the lights on and off in a pulsing pattern
-            if not dryRun:
-                pulse(bulbColor1, bulbColor2, delay)
-            else:
-                print("pulse " , bulbColor1)
+            bulb1.setColor(bulbColor1)
+            bulb2.setColor(bulbColor2)
+            bulb3.setColor(bulbColor3)
+
+            #if not dryRun:
+            #    pulse(bulbColor1, bulbColor2, delay)
+            #else:
+            #    print("pulse " , bulbColor1)
     except(KeyboardInterrupt, SystemExit):
         print("End of program")
         # disconnect from everything
