@@ -9,6 +9,8 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jscolor/2.0.4/jscolor.js"></script>
     <!-- Google Web Fonts -->
     <link href='https://fonts.googleapis.com/css?family=Oswald|Roboto+Condensed:400,400italic,700italic,700,300' rel='stylesheet' type='text/css'>
+    <!-- js for preset buttons -->
+    <script src="js/script.js"></script>
 </head>
 <body>
     <div id="header">
@@ -16,6 +18,13 @@
         <a id="githublink" href="https://github.com/chris-johnston">github.com/Chris-Johnston</a>
     </div>
     <div id="wrapper">
+        <div id="presetbox">
+            <p>Presets:</p>
+            <button onclick="setPreset(this);" id="presetRedWhiteBlue">Red White and Blue Preset</button>
+            <button onclick="setPreset(this);" id="presetGameDay" >Seahawks Game Preset</button>
+            <button onclick="setPreset(this);" id="presetXMAS">X-Mas Preset</button>
+            <button onclick="setPreset(this);" id="presetNormal">Normal Preset</button>
+        </div>
             <!-- A lot of this code is being referenced from Internet-Xmas-Tree -->
         <form id="lightForm" action="submit.php" method="get">
             <p>

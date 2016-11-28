@@ -33,12 +33,14 @@
     <Content Include="configuration.ini" />
     <Content Include="www\colorData.json" />
     <Content Include="www\css\style.css" />
+    <Content Include="www\js\script.js" />
     <Content Include="www\submit.php" />
     <Content Include="www\index.html" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="www\" />
     <Folder Include="www\css\" />
+    <Folder Include="www\js\" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

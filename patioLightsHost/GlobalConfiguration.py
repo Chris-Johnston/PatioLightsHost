@@ -1,4 +1,4 @@
-# Patio Lights Controller
+﻿# Patio Lights Controller
 import configparser
 
 # class to store configuration values
@@ -10,16 +10,19 @@ class GlobalConfiguration(object):
     Lightbulb2_IP = "noIP"
     Lightbulb3_IP = "noIP"
     patternsDict = {}
+    bulbPatternsDict = {}
 
     def __init__(self, path):
         """ constructor """
         self.SerialPort = "none"
-        self.BaudRate = 115200
+        self.BaudRate = 250000
         self.DataFile = path
         self.Lightbulb1_IP = "noIP"
         self.Lightbulb2_IP = "noIP"
         self.Lightbulb3_IP = "noIP"
+        self.BulbPattern = ""
         self.patternsDict = {}
+        self.bulbPatternsDict = {}
 
     def load(self):
         """ loads the data from the configuration file """
@@ -39,6 +42,7 @@ class GlobalConfiguration(object):
             self.Lightbulb2_IP = Config.get("Configuration", "Lightbulb2IP")
             self.Lightbulb3_IP = Config.get("Configuration", "Lightbulb3IP")
             self.patternsDict = dict(Config.items("Patterns"))
+            self.bulbPatternsDict = dict(Config.items("BulbPatterns"))
 
         except Exception as e:
             print("Error fetching configuration data from file.")

@@ -80,7 +80,7 @@ def readWebColorData():
         bulbColor2 = jsonData["bulbColor2"]
         bulbColor3 = jsonData["bulbColor3"]
         bulbDelay1 = int(jsonData["bulbDelay1"])
-        bulbPattern = jsonData["bulbPattern"]
+        bulbPattern = jsonData["bulddbPattern"]
 
         stripColor1 = jsonData["stripColor1"]
         stripColor2 = jsonData["stripColor2"]
@@ -143,32 +143,33 @@ if __name__ == "__main__":
         # allows everything to get ready
         #time.sleep(5)
         while(True):
-            # test command, this works
-            #command = 'start225500025500000000005000500end\n'
-
-            #command = serLights.getSerialString('2', (255,0,0), (0,0,0), 500, 500)
-            #print(command)
-            #serLights.sendMessage(command)
-            #c = ( random.randint(0, 255), random.randint(0, 255), random.randint(0, 255))
-            #serLights.setPatternAndColors('3', c, (0,0,0), 100, 100, 15)
-
+            # sleep for a bit, so that I'm not constantly reading from the file
+            time.sleep(5)
             # read the contents of the file again
             readWebColorData()
+            # send info to serial (will automatically discard duplicates)
             serLights.setPatternAndColors(stripPattern, stripColor1, stripColor2, stripDelay1, stripDelay1, stripWidth)
-            # sleep for a little bit
-            time.sleep(5)
-            # keep the lights on for a few seconds
-            #placeholder pattern, just turn the lights on and off in a pulsing pattern
-            bulb1.setColor(bulbColor1)
-            bulb2.setColor(bulbColor2)
-            bulb3.setColor(bulbColor3)
 
-            #if not dryRun:
-            #    pulse(bulbColor1, bulbColor2, delay)
-            #else:
-            #    print("pulse " , bulbColor1)
+            # determine which lightbulb pattern to use
+            if(bulbPattern == config.bulbPatternsDict.get('pattern_bulb_color1')):
+                bulb1.setColor(bulbColor1)
+                bulb2.setColor(bulbColor1)
+                bulb3.setColor(bulbColor1)
+            elif(bulbPattern == config.bulbPatternsDict.get('pattern_bulb_coloreach')):
+                bulb1.setColor(bulbColor1)
+                bulb2.setColor(bulbColor2)
+                bulb3.setColor(bulbColor3)
+            elif(bulbPattern == config.bulbPatternsDict.get('pattern_bulb_wave')):
+                print('color wave')
+                #todo
+                # the bulbs aren't the best at updating quickly, so may be best to keep them static
+            else:
+                # default to each color picked by web interface
+                bulb1.setColor(bulbColor1)
+                bulb2.setColor(bulbColor2)
+                bulb3.setColor(bulbColor3)
     except(KeyboardInterrupt, SystemExit):
-        print("End of program")
+        #print("End of program")
         # disconnect from everything
         bulb1.disconnect()
         bulb2.disconnect()
