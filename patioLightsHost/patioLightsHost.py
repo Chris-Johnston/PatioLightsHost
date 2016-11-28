@@ -80,7 +80,7 @@ def readWebColorData():
         bulbColor2 = jsonData["bulbColor2"]
         bulbColor3 = jsonData["bulbColor3"]
         bulbDelay1 = int(jsonData["bulbDelay1"])
-        bulbPattern = jsonData["bulddbPattern"]
+        bulbPattern = jsonData["bulbPattern"]
 
         stripColor1 = jsonData["stripColor1"]
         stripColor2 = jsonData["stripColor2"]
