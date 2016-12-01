@@ -1,5 +1,7 @@
 ﻿# Patio Lights Controller
 import configparser
+import logging
+logger = logging.getLogger(__name__)
 
 # class to store configuration values
 class GlobalConfiguration(object):
@@ -45,5 +47,6 @@ class GlobalConfiguration(object):
             self.bulbPatternsDict = dict(Config.items("BulbPatterns"))
 
         except Exception as e:
-            print("Error fetching configuration data from file.")
+            #print("Error fetching configuration data from file.")
+            logger.warn("Error fetching configuration data" + str(e))
             raise Exception("Error fetching configuration data" + str(e))

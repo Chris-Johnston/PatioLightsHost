@@ -2,6 +2,8 @@
 import serial
 import json
 import time
+import logging
+logger = logging.getLogger(__name__)
 from threading import Thread
 
 class SerialLightController(object):
@@ -41,13 +43,14 @@ class SerialLightController(object):
     def _connect(self):
         try:
             self.ser = serial.Serial(self.config.SerialPort, self.config.BaudRate)
-            print("connected to serial")
+            #print("connected to serial")
             time.sleep(5)
             self.ready = True
             # compensate for the arduino rebooting
         except Exception as e:
-            print(e)
-            print("Error opening serial connection!")
+            #print("Serial Connect Error ", e)
+            logger.warn("Serial Connect Error "+ str(e))
+            #print("Error opening serial connection!")
 
     def connect(self):
         self.connectionThread = Thread(target=self._connect)
@@ -57,7 +60,12 @@ class SerialLightController(object):
         """ disconnects """
         # ensure that it turns off before closing
         #self._setPatternAndColors('0', (0,0,0), (0,0,0), 0, 0)
-        self.ser.flush()
+        if(self.ser.closed == False):
+            try:
+                self.ser.flush()
+            except:
+                #print("Error flushing serial for disconnect")
+                logger.warn("Couldn't flush serial for disconnect")
         self.ser.close()
         self.ready = False
 
@@ -78,7 +86,7 @@ class SerialLightController(object):
                     #message = 's72550000000000000001500225008e\r'
                     cmdBytes = bytes(message, 'utf-8')
                     # print the garbage character
-                    print("x")
+                    #print("x")
                     #self.ser.write(bytes('\r' + 'x'*100 + '\r', 'utf-8'))
                     self.ser.write(b'x')
                 
@@ -96,7 +104,7 @@ class SerialLightController(object):
                     #    time.sleep(0.1)
                     #    response = str(self.ser.read_all())
                     #    print(response)
-                    print("\nWriting", cmdBytes)
+                    #print("\nWriting", cmdBytes)
                     # then print the actual data
                     #self.ser.write(cmdBytes)
                     self.ser.write(cmdBytes)
@@ -105,18 +113,22 @@ class SerialLightController(object):
                     self.ready = True
                 except Exception as e:
                     self.ready = True
-                    print(e)
-                    print("error sending message : " + message)
+                    #raise e
+                    #print(e)
+                    #print("error sending message : " + message)
 
     def _setPatternAndColors(self, patternValue, color1tuple, color2tuple, animationSpeed, holdSpeed, width):
         try:
             command = self.getSerialString(patternValue, color1tuple, color2tuple, animationSpeed, holdSpeed, width)
             self.sendMessage(command)
         except Exception as e:
-            print(e)
-            print("Error setting pattern and colors")
+            logger.warn("Couldn't set pattern ", e)
+            #raise e
+            #print(e)
+            #print("Error setting pattern and colors")
 
     def setPatternAndColors(self, patternValue, color1tuple, color2tuple, animationSpeed, holdSpeed, width):
-        print("setting pattern")
+        #print("setting pattern")
+
         self.writeThread = Thread(target=self._setPatternAndColors, args=(patternValue, color1tuple, color2tuple, animationSpeed, holdSpeed,width))
         self.writeThread.start()
