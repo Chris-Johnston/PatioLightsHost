@@ -80,6 +80,7 @@ class SerialLightController(object):
             # over tolerance for duplictates (3)
             if((message == self.prevCommand and self.duplicateCounter <= self.duplicateTolerance) or message != self.prevCommand):
                 try:
+                    
                     if(self.prevCommand != message):
                         self.duplicateCounter = 0
                     self.ready = False # don't have another sendMessage during this one
@@ -110,6 +111,7 @@ class SerialLightController(object):
                     self.ser.write(cmdBytes)
                     self.ser.flushOutput()
                     self.prevCommand = message
+                    logger.info("Sending command: " + message)
                     self.ready = True
                 except Exception as e:
                     self.ready = True
