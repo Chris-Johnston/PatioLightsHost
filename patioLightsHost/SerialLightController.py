@@ -113,12 +113,14 @@ class SerialLightController(object):
                     self.ready = True
                 except Exception as e:
                     self.ready = True
+                    logger.warn("Send Message Error " + str(e))
                     #raise e
                     #print(e)
                     #print("error sending message : " + message)
 
     def _setPatternAndColors(self, patternValue, color1tuple, color2tuple, animationSpeed, holdSpeed, width):
         try:
+            logger.info("Setting Pattern and Colors")
             command = self.getSerialString(patternValue, color1tuple, color2tuple, animationSpeed, holdSpeed, width)
             self.sendMessage(command)
         except Exception as e:
