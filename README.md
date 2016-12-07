@@ -29,6 +29,58 @@ It then controls the lightbulbs and sends data to the Arduino.
 <img src="/resources/seahawks1.jpg" width="250" alt="Seahawks Lights"/>
 <img src="/resources/huskies1.jpg" width="250" alt="Huskies Lights"/>
 
-### Christmas Themes
+todo christmas themes
 
-todo get xmas pictures
+## Installation and Usage
+
+This project is split up into two components, the host and the client.
+
+This is the page for the host software. The client is located at [PatioLightsClient](https://github.com/Chris-Johnston/PatioLightsClient).
+
+First download and install PHP and Apache2. I'm not going to cover that here.
+
+I recommend downloading each into a parent directory and keeping the host and the client separate.
+
+```bash
+# create a parent directory
+mkdir Lights
+cd Lights
+# download each of the repos
+git clone https://github.com/Chris-Johnston/PatioLightsHost.git
+git clone https://github.com/Chris-Johnston/PatioLightsClient.git
+```
+
+Point your Apache configuration at `/somePath/patioLightsHost/www/` for the website source.
+
+The host software contains a configuration file that should be edited (and is platform dependent!). Modify `/patioLightsHost/configuration.ini` to match your needs.
+You will have to know what serial port the Arduino running the client software is connected to. Keep the baud rate at 250000, as the client software runs at the same rate.
+The configuration file contains the IP address of each of the Wifi enabled bulbs. See [PythonWifiLedBulbController](https://github.com/Chris-Johnston/PythonWifiLedBulbController) for details on getting their IP addresses. *todo implement bulbless mode in configuration.*
+Don't modify the pattern values at the bottom of the file.
+
+Often the web data file will have permissions issues when being downloaded. To ensure that PHP can modify the file, run `chmod 777 /patioLightsHost/www/colorData.json`.
+
+The host software contains a script that will have to be run at startup and stay running in the background. I did this by adding it to `/etc/rc.local` before `exit 0`.
+
+```bash
+# first delete the log file (if it exists)
+rm -f /somePath/PatioLightsHost/patioLightsHost/patioLights.log
+
+# must change directory to patioLightsHost folder before starting program
+# & will make the program run in the background
+(cd /somePath/PatioLightsHost/patioLightsHost/ && python3 patioLightsHost.py) &
+```
+
+For debugging purposes, the script works fine if run manually.
+
+After rebooting, the script should be running in the background. I can verify this by running `ps -aux | grep python3` and seeing my process. If I want to monitor the host script's log, I can view it with the following command:
+
+```bash
+# monitor the log file for changes
+tail -f /somePath/PatioLightsHost/patioLightsHost/patioLights.log -f
+```
+
+Navigate to your webserver and you should see the data entry form. Enter your values, hit submit and ensure that there are no errors in the submit page or the log.
+
+## External Dependencies
+
+HTML Color picker uses [jscolor](http://jscolor.com/).
