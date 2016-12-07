@@ -106,7 +106,7 @@
                 </div>
             </div>
         <br />
-        <a href="index.html">Return the the color picker.</a>
+        <a href="index.html" data-rel="back">Return the the color picker.</a>
     </div>
 </body>
 </html>
