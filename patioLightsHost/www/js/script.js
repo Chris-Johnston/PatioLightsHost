@@ -10,12 +10,13 @@
     {
 	case "presetOff":
             // preset that turns everything off
-	    form["bulb1"].value = "000000";
-	    form["bulb2"].value = "000000";
+            form["bulb1"].value = "000000";
+            form["bulb2"].value = "000000";
             form["bulb3"].value = "000000";
             form["color1"].value = "000000";
             form["color2"].value = "000000";
             form["stripPattern"].value = "0";
+            break;
         case "presetRedWhiteBlue":
             // preset for red white and blue lights
             form["bulb1"].value = "FF0000";
