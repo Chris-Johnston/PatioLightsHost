@@ -17,7 +17,9 @@ See [PatioLightsClient](https://github.com/Chris-Johnston/PatioLightsClient) for
 The Pi runs a web server that hosts the web interface, and runs a script that monitors for any changes in the data entered.
 It then controls the lightbulbs and sends data to the Arduino.
 
-## Images of Use
+## Example Images
+
+All of the colors and patterns can be customized entirely. Here are some examples.
 
 ### Halloween Themes
 
@@ -27,9 +29,12 @@ It then controls the lightbulbs and sends data to the Arduino.
 ### Football Themes
 
 <img src="/resources/seahawks1.jpg" width="250" alt="Seahawks Lights"/>
+<img src="/resources/seahawks2.jpg" width="250" alt="Seahawks Lights"/>
 <img src="/resources/huskies1.jpg" width="250" alt="Huskies Lights"/>
 
-todo christmas themes
+### Christmas Themes
+
+<img src="/resources/xmas1.jpg" width="250" alt="Xmas Lights"/>
 
 ## Installation and Usage
 
