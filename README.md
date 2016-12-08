@@ -21,6 +21,8 @@ It then controls the lightbulbs and sends data to the Arduino.
 
 All of the colors and patterns can be customized entirely. Here are some examples.
 
+<img src="https://fat.gfycat.com/CostlyAggravatingGoldfish.gif" width="750" alt="Gif of use"/>
+
 ### Halloween Themes
 
 <img src="/resources/halloween1.jpg" width="250" alt="Halloween Lights"/>
