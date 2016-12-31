@@ -140,15 +140,15 @@ if __name__ == "__main__":
                 logger.warn("Set pattern " , e)
 
             # determine which lightbulb pattern to use
-            if(bulbPattern == config.bulbPatternsDict.get('pattern_bulb_color1')):
+            if(bulbPattern == int(config.bulbPatternsDict.get('pattern_bulb_color1'))):
                 bulb1.setColor(bulbColor1)
                 bulb2.setColor(bulbColor1)
                 bulb3.setColor(bulbColor1)
-            elif(bulbPattern == config.bulbPatternsDict.get('pattern_bulb_coloreach')):
+            elif(bulbPattern == int(config.bulbPatternsDict.get('pattern_bulb_coloreach'))):
                 bulb1.setColor(bulbColor1)
                 bulb2.setColor(bulbColor2)
                 bulb3.setColor(bulbColor3)
-            elif(bulbPattern == config.bulbPatternsDict.get('pattern_bulb_wave')):
+            elif(bulbPattern == int(config.bulbPatternsDict.get('pattern_bulb_wave'))):
                 logger.info('bulb pattern color wave')
                 #todo
                 # the bulbs aren't the best at updating quickly, so may be best to keep them static
