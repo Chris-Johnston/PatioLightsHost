@@ -4,32 +4,33 @@ import time
 import json
 import random
 import logging
+
 logging.basicConfig(filename='patioLights.log', level=logging.DEBUG)
 logger = logging.getLogger(__name__)
 
-from WifiBulb import WifiBulb
+from lib.wifibulb.src.WifiBulb import WifiBulb
 from SerialLightController import SerialLightController
-
 
 dryRun = False
 
 ser = serial.Serial()
 
 # data
-bulbColor1 = (0,0,0)
-bulbColor2 = (0,0,0)
-bulbColor3 = (0,0,0)
+bulbColor1 = (0, 0, 0)
+bulbColor2 = (0, 0, 0)
+bulbColor3 = (0, 0, 0)
 bulbDelay1 = 999
 bulbPattern = 0
 
-stripColor1 = (0,0,0)
-stripColor2 = (0,0,0)
+stripColor1 = (0, 0, 0)
+stripColor2 = (0, 0, 0)
 stripDelay1 = 750
 stripPattern = 0
 stripWidth = 0
 
 # patio lights main script
 config = GlobalConfiguration("configuration.ini")
+
 
 # should handle the lightbulb pattern stuff somewhere else
 def readWebColorData():
@@ -44,9 +45,9 @@ def readWebColorData():
     global stripPattern
     global stripWidth
     try:
-        #print(config.DataFile)
+        # print(config.DataFile)
         file = open(config.DataFile, "r")
-        
+
         jsonData = json.load(file)
         # read data and update it
         bulbColor1 = jsonData["bulbColor1"]
@@ -61,22 +62,23 @@ def readWebColorData():
         stripPattern = jsonData["stripPattern"]
         stripWidth = jsonData["width"]
         file.close()
-        #print("got data from file")
+        # print("got data from file")
     except OSError:
-        #print("Data file not found, check configuration.ini")
+        # print("Data file not found, check configuration.ini")
         logger.error("Data file not found!")
     except Exception as e:
-        #print(e)
+        # print(e)
         logger.warn("Exception in readWebColorData: ", e)
 
-        #todo consider adding downtimes where lights cannot be changed, or have
+        # todo consider adding downtimes where lights cannot be changed, or have
         # a default pattern for tduring those times
         # so I'm not strobing out at 3am
 
+
 if __name__ == "__main__":
-    #print("Start of program")
-    #print(dryRun)
-    #logger.basicConfig(filename='patioLights.log', level=logger.DEBUG)
+    # print("Start of program")
+    # print(dryRun)
+    # logger.basicConfig(filename='patioLights.log', level=logger.DEBUG)
     logger.info("Staring program")
     try:
         config = GlobalConfiguration("configuration.ini")
@@ -91,7 +93,7 @@ if __name__ == "__main__":
         serLights.connect()
     except Exception as e:
         logger.warn("Serial Connection ", e)
-            
+
     # open data file, parse it, close it
     readWebColorData()
 
@@ -116,17 +118,17 @@ if __name__ == "__main__":
             logger.info("DRYRUN all bulbs set to ", bulbColor1)
         delay = 1
         longerDelay = 0.5
-        
-        #serLights.setPatternAndColors('2', (255,0,0), (0,0,0), 500,0)
-        #command = serLights.getJSONStr('2', (255, 0,0), (0,0,0), 500, 500)
 
-        #if not dryRun:
+        # serLights.setPatternAndColors('2', (255,0,0), (0,0,0), 500,0)
+        # command = serLights.getJSONStr('2', (255, 0,0), (0,0,0), 500, 500)
+
+        # if not dryRun:
         #    serLights.sendMessage(command)
-        #else:
+        # else:
         #    print("Serial: " + command)
         # allows everything to get ready
-        #time.sleep(5)
-        while(True):
+        # time.sleep(5)
+        while (True):
             # sleep for a bit, so that I'm not constantly reading from the file
             time.sleep(5)
             # read the contents of the file again
@@ -134,23 +136,24 @@ if __name__ == "__main__":
             logger.info("read color data")
             # send info to serial (will automatically discard duplicates)
             try:
-                serLights.setPatternAndColors(stripPattern, stripColor1, stripColor2, stripDelay1, stripDelay1, stripWidth)
+                serLights.setPatternAndColors(stripPattern, stripColor1, stripColor2, stripDelay1, stripDelay1,
+                                              stripWidth)
                 logger.info("Set pattern and colors")
             except Exception as e:
-                logger.warn("Set pattern " , e)
+                logger.warn("Set pattern ", e)
 
             # determine which lightbulb pattern to use
-            if(bulbPattern == int(config.bulbPatternsDict.get('pattern_bulb_color1'))):
+            if (bulbPattern == int(config.bulbPatternsDict.get('pattern_bulb_color1'))):
                 bulb1.setColor(bulbColor1)
                 bulb2.setColor(bulbColor1)
                 bulb3.setColor(bulbColor1)
-            elif(bulbPattern == int(config.bulbPatternsDict.get('pattern_bulb_coloreach'))):
+            elif (bulbPattern == int(config.bulbPatternsDict.get('pattern_bulb_coloreach'))):
                 bulb1.setColor(bulbColor1)
                 bulb2.setColor(bulbColor2)
                 bulb3.setColor(bulbColor3)
-            elif(bulbPattern == int(config.bulbPatternsDict.get('pattern_bulb_wave'))):
+            elif (bulbPattern == int(config.bulbPatternsDict.get('pattern_bulb_wave'))):
                 logger.info('bulb pattern color wave')
-                #todo
+                # todo
                 # the bulbs aren't the best at updating quickly, so may be best to keep them static
             else:
                 # default to each color picked by web interface
@@ -158,12 +161,12 @@ if __name__ == "__main__":
                 bulb2.setColor(bulbColor2)
                 bulb3.setColor(bulbColor3)
     except(KeyboardInterrupt, SystemExit):
-        #print("End of program")
+        # print("End of program")
         # disconnect from everything
         bulb1.disconnect()
         bulb2.disconnect()
         bulb3.disconnect()
         serLights.disconnect()
-        #print("end")
+        # print("end")
         logger.info("Closed")
-        #turn everything off
+        # turn everything off

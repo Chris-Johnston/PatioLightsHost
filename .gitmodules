@@ -1,0 +1,3 @@
+[submodule "patioLightsHost/lib/wifibulb"]
+	path = patioLightsHost/lib/wifibulb
+	url = https://github.com/Chris-Johnston/PythonWifiLedBulbController
