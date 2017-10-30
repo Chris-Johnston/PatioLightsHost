@@ -54,7 +54,7 @@ def readWebColorData():
         bulbColor2 = jsonData["bulbColor2"]
         bulbColor3 = jsonData["bulbColor3"]
         bulbDelay1 = int(jsonData["bulbDelay1"])
-        bulbPattern = jsonData["bulbPattern"]
+        bulbPattern = int(jsonData["bulbPattern"])
 
         stripColor1 = jsonData["stripColor1"]
         stripColor2 = jsonData["stripColor2"]
@@ -130,7 +130,7 @@ if __name__ == "__main__":
         # time.sleep(5)
         while (True):
             # sleep for a bit, so that I'm not constantly reading from the file
-            time.sleep(5)
+            time.sleep(1)
             # read the contents of the file again
             readWebColorData()
             logger.info("read color data")
@@ -152,9 +152,18 @@ if __name__ == "__main__":
                 bulb2.setColor(bulbColor2)
                 bulb3.setColor(bulbColor3)
             elif (bulbPattern == int(config.bulbPatternsDict.get('pattern_bulb_wave'))):
-                logger.info('bulb pattern color wave')
-                # todo
-                # the bulbs aren't the best at updating quickly, so may be best to keep them static
+                time.sleep(bulbDelay1 / 1000)
+                bulb1.setColor(bulbColor1)
+                bulb2.setColor(bulbColor2)
+                bulb3.setColor(bulbColor3)
+                time.sleep(bulbDelay1 / 1000)
+                bulb1.setColor(bulbColor2)
+                bulb2.setColor(bulbColor3)
+                bulb3.setColor(bulbColor1)
+                time.sleep(bulbDelay1 / 1000)
+                bulb1.setColor(bulbColor3)
+                bulb2.setColor(bulbColor1)
+                bulb3.setColor(bulbColor2)
             else:
                 # default to each color picked by web interface
                 bulb1.setColor(bulbColor1)
