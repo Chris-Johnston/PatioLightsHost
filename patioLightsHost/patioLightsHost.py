@@ -171,6 +171,11 @@ if __name__ == "__main__":
                 bulb3.setColor(bulbColor3)
     except(KeyboardInterrupt, SystemExit):
         # print("End of program")
+        # reset the lights back into normal lights
+        bulb1.warmwhite();
+        bulb2.warmwhite();
+        bulb3.warmwhite();
+
         # disconnect from everything
         bulb1.disconnect()
         bulb2.disconnect()
